@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/a8323b4c4d4846378c90dc7db8964671/artifacts
+end_time: 1757624740591
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: a8323b4c4d4846378c90dc7db8964671
+run_name: method-mini-lr-0.01-reg-Normal-poly-False
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757624696280
+status: 3
+tags: []
+user_id: mastersubhajit

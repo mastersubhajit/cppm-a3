@@ -1,0 +1,77 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
+
+# Test results
+*.out
+*.coverage
+.coverage.*
+
+# Machine Learning artifacts
+*.h5
+*.ckpt
+*.pth
+*.pt
+*.tflite
+*.pb
+
+
+
+# Data files
+*.tsv
+*.dat
+*.db
+*.sqlite
+*.npz
+*.npy
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.bak
+*.old
+*.orig

@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/a8c1f6cdff9343cdb29ef1905cf9d4db/artifacts
+end_time: 1757624496965
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: a8c1f6cdff9343cdb29ef1905cf9d4db
+run_name: method-batch-lr-0.01-reg-ElasticNet
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757624475210
+status: 3
+tags: []
+user_id: mastersubhajit

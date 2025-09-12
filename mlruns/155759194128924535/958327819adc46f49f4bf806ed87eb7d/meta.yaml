@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/958327819adc46f49f4bf806ed87eb7d/artifacts
+end_time: 1757640370406
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: 958327819adc46f49f4bf806ed87eb7d
+run_name: method-mini-lr-0.001-reg-Ridge-poly-False-momentum-Momentum not used-init-xavier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757640351220
+status: 3
+tags: []
+user_id: mastersubhajit

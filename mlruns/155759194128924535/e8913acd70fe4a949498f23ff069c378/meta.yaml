@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/e8913acd70fe4a949498f23ff069c378/artifacts
+end_time: 1757642486340
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: e8913acd70fe4a949498f23ff069c378
+run_name: Fold-2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757642456130
+status: 3
+tags: []
+user_id: mastersubhajit

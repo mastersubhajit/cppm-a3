@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/8364a235960d43db8cc2c72829218b70/artifacts
+end_time: 1757640626946
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: 8364a235960d43db8cc2c72829218b70
+run_name: method-batch-lr-0.001-reg-Ridge-poly-True-momentum-Momentum Used-init-zero
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757640539137
+status: 3
+tags: []
+user_id: mastersubhajit

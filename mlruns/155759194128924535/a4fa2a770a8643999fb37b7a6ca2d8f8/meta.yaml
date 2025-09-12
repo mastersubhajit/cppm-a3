@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/a4fa2a770a8643999fb37b7a6ca2d8f8/artifacts
+end_time: 1757624970019
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: a4fa2a770a8643999fb37b7a6ca2d8f8
+run_name: method-mini-lr-0.01-reg-Normal-poly-True-momentum-True
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757624902014
+status: 3
+tags: []
+user_id: mastersubhajit

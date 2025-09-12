@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/525d9de15e654a10b0a82fe99d4240a9/artifacts
+end_time: 1757624475201
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: 525d9de15e654a10b0a82fe99d4240a9
+run_name: method-batch-lr-0.01-reg-Lasso
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757624439785
+status: 3
+tags: []
+user_id: mastersubhajit

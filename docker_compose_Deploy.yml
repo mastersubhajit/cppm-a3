@@ -1,0 +1,31 @@
+services:
+  web:
+    image: mastersubhajit/cppm-app:latest
+    container_name: web-125998
+    platform: linux/amd64      
+    command: python3 app.py
+    environment:
+      - HOST=0.0.0.0
+      - PORT=80
+    labels:
+      # Allow Traefik to talk with your service
+      - traefik.enable=true
+      # Tell Traefik to use port 80
+      - traefik.http.services.web-st125998.loadbalancer.server.port=80
+      # This config you domain name. By default, your subdomain is <service_name>-<folder_name>
+      # If you which to change the subdomain name, you uncomment the below configuration
+      - traefik.http.routers.web-st125998.rule=Host(`st125998.ml.brain.cs.ait.ac.th`)
+      # Below is for enable SSL.
+      - traefik.http.routers.web-st125998.tls=true
+      - traefik.http.routers.web-st125998.tls.certresolver=production
+      - traefik.http.routers.web-st125998.entrypoints=websecure
+    # This define network. You would need to keep it like this.
+    networks:
+      - default
+      - traefik_default
+
+# Keep it like this too.
+networks:
+  default:
+  traefik_default:
+    external: true

@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/203c897f9aff4077bf540fd389086970/artifacts
+end_time: 1757635027471
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: 203c897f9aff4077bf540fd389086970
+run_name: method-batch-lr-0.01-reg-Ridge-poly-False
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757635004778
+status: 3
+tags: []
+user_id: mastersubhajit

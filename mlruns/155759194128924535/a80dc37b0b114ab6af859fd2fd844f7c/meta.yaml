@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/a80dc37b0b114ab6af859fd2fd844f7c/artifacts
+end_time: 1757651126628
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: a80dc37b0b114ab6af859fd2fd844f7c
+run_name: method-sto-lr-0.01-reg-ElasticNet-poly-True-momentum-Momentum not used-init-xavier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757650993606
+status: 3
+tags: []
+user_id: mastersubhajit

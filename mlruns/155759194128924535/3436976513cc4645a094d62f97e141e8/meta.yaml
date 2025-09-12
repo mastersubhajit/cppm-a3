@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/3436976513cc4645a094d62f97e141e8/artifacts
+end_time: 1757648014924
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: 3436976513cc4645a094d62f97e141e8
+run_name: method-batch-lr-0.01-reg-Lasso-poly-True-momentum-Momentum Used-init-xavier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757647942554
+status: 3
+tags: []
+user_id: mastersubhajit

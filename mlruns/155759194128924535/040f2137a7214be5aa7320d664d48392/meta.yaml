@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/040f2137a7214be5aa7320d664d48392/artifacts
+end_time: 1757646212983
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: 040f2137a7214be5aa7320d664d48392
+run_name: method-mini-lr-0.0001-reg-Lasso-poly-True-momentum-Momentum not used-init-zero
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757646114275
+status: 3
+tags: []
+user_id: mastersubhajit

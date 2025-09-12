@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/155759194128924535/cd7b69160b6849aaad121063ef6ac3c3/artifacts
+end_time: 1757635499138
+entry_point_name: ''
+experiment_id: '155759194128924535'
+lifecycle_stage: active
+run_id: cd7b69160b6849aaad121063ef6ac3c3
+run_name: method-sto-lr-0.01-reg-Normal-poly-True
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757635348219
+status: 3
+tags: []
+user_id: mastersubhajit
