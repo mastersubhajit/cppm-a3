@@ -75,3 +75,17 @@ env/
 *.bak
 *.old
 *.orig
+
+# CI/CD artifacts
+bandit-report.json
+safety-report.json
+trivy-results.sarif
+htmlcov/
+.coverage
+*.coverage
+.pytest_cache/
+.tox/
+
+# Code quality tools
+.mypy_cache/
+.ruff_cache/
