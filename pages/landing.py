@@ -9,7 +9,8 @@ layout = html.Div([
         html.Div([
             html.H1("Car Price Predictor", className="hero-title"),
             html.P("AI-powered predictions for your dream cars.", className="hero-subtitle"),
-            dcc.Link("Get Started", href="/new-model", className="hero-button"),
+            # Link updated to A3 Model
+            dcc.Link("Get Started", href="/a3-model", className="hero-button"),
         ], className="hero-content")
     ], className="hero-section"),
 

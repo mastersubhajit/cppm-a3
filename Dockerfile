@@ -1,11 +1,15 @@
 FROM python:3.12-slim
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Install gcc, build tools, and Python headers needed for packages like biopython
-RUN apt-get update && apt-get install -y \
+ENV UV_LINK_MODE=copy
+ENV MLFLOW_TRACKING_INSECURE_TLS=true
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
     build-essential \
+    git \
     gcc \
     g++ \
     libffi-dev \
@@ -13,13 +17,22 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Set Matplotlib backend to Agg (headless mode)
+# ENV MPLBACKEND=Agg
+RUN pip install --upgrade requests urllib3
+
+# Install uv (fast Python package manager)
+RUN pip install uv
 
 # Copy project files
-COPY . .
+COPY . /app
 
-# Run the app
-CMD ["python", "app.py"]
+# Create virtual environment and install dependencies
+RUN uv venv .venv && \
+    uv pip install --upgrade pip && \
+    uv pip install -r requirements.txt
+
+# Expose the port the app runs on
+EXPOSE 8050
+# Default command: keep container running
+CMD ["sleep", "infinity", "gunicorn", "--bind", "0.0.0.0:8050", "app:server"]

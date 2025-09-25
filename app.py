@@ -20,8 +20,10 @@ server = app.server
 navbar = dbc.NavbarSimple(
     children=[
         dbc.NavItem(dbc.NavLink("Home", href="/", className="nav-link-neumorphism")),
-        dbc.NavItem(dbc.NavLink("New Model", href="/new-model", className="nav-link-neumorphism")),
-        dbc.NavItem(dbc.NavLink("Old Model", href="/old-model", className="nav-link-neumorphism")),
+        # NEW A3 MODEL LINK
+        dbc.NavItem(dbc.NavLink("A3 Model", href="/a3-model", className="nav-link-neumorphism")),
+        dbc.NavItem(dbc.NavLink("A2 Model", href="/new-model", className="nav-link-neumorphism")),
+        dbc.NavItem(dbc.NavLink("A1 Model", href="/old-model", className="nav-link-neumorphism")),
         dbc.NavItem(dbc.NavLink("Visualization", href="/visualization", className="nav-link-neumorphism")),
     ],
     brand="Car Price Predictor",
@@ -40,4 +42,4 @@ app.layout = html.Div([
 
 # Run
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=8080)

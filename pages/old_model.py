@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import joblib
 
-dash.register_page(__name__, path="/old-model", name="Old Model")
+dash.register_page(__name__, path="/old-model", name="A1 Model")
 
 # Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -33,7 +33,7 @@ OUTPUT_STYLE = {"background": "#e0e5ec","boxShadow": "inset 6px 6px 12px #a3b1c6
 
 # --- Layout ---
 layout = html.Div(style=NEUMORPHISM_STYLE, children=[
-    html.H1("Old Model Predictor", style={"textAlign": "center", "marginBottom": "24px"}),
+    html.H1("A1 Model Predictor", style={"textAlign": "center", "marginBottom": "24px"}),
 
     html.Div(style=CARD_STYLE, children=[
         html.Div(style=ROW_STYLE, children=[

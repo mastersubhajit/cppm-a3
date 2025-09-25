@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import joblib
 
-dash.register_page(__name__, path="/new-model", name="New Model")
+dash.register_page(__name__, path="/new-model", name="A2 Model")
 
 # Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +41,7 @@ BUTTON_STYLE_MODAL = {"background": "#e0e5ec","boxShadow": "5px 5px 10px #a3b1c6
                       "fontWeight": "600","marginTop": "20px"}
 # --- Layout ---
 layout = html.Div(style=NEUMORPHISM_STYLE, children=[
-    html.H1("New Model Predictor", style={"textAlign": "center", "marginBottom": "24px"}),
+    html.H1("A2 Model Predictor", style={"textAlign": "center", "marginBottom": "24px"}),
 
     # Modal popup
     html.Div(id="popup-modal", style=MODAL_STYLE, children=[

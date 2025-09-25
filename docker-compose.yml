@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
     entrypoint: ""
-    # command: sleep infinity # Keep the container running
+    command: sleep infinity
   mlflow:
     build: 
       context: .

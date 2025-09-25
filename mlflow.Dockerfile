@@ -1,4 +1,4 @@
-FROM python:3.10-bookworm
+FROM python:3.12-slim
 
 # Update all packages to their latest versions to minimize vulnerabilities
 RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
