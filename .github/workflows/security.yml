@@ -1,0 +1,69 @@
+name: Security and Dependency Updates
+
+on:
+  schedule:
+    # Run security checks weekly on Sundays at 00:00 UTC
+    - cron: '0 0 * * 0'
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    name: Security Scan
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+    
+    - name: Run Safety (dependency vulnerability check)
+      run: |
+        python -m safety scan --json --output safety-report.json || true
+        if [ -f safety-report.json ]; then
+          echo "Safety report generated, checking for vulnerabilities..."
+          cat safety-report.json
+        fi
+    
+    - name: Run Bandit (security linting)
+      run: |
+        python -m bandit -r src/ -f json -o bandit-report.json || true
+        if [ -f bandit-report.json ]; then
+          echo "Bandit security scan completed"
+          cat bandit-report.json
+        fi
+    
+    - name: Upload security reports
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          safety-report.json
+          bandit-report.json
+        retention-days: 30
+
+  dependency-review:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Dependency Review
+      uses: actions/dependency-review-action@v3
+      with:
+        # Fail the action if there are any vulnerable dependencies
+        fail-on-severity: moderate

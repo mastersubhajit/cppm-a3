@@ -2,8 +2,11 @@
 Multinomial LogisticRegression with Car Price Prediction in Categorical Data
 
 [![CI/CD Pipeline](https://github.com/mastersubhajit/cppm-a3/actions/workflows/ci.yml/badge.svg)](https://github.com/mastersubhajit/cppm-a3/actions/workflows/ci.yml)
+[![Security Scan](https://github.com/mastersubhajit/cppm-a3/actions/workflows/security.yml/badge.svg)](https://github.com/mastersubhajit/cppm-a3/actions/workflows/security.yml)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
 
 ## Overview
 
@@ -118,9 +121,9 @@ flake8 .
 
 ## CI/CD Pipeline
 
-This project includes a comprehensive CI/CD pipeline using GitHub Actions that:
+This project includes a comprehensive CI/CD pipeline using GitHub Actions that provides:
 
-### Continuous Integration
+### Continuous Integration (`.github/workflows/ci.yml`)
 - **Multi-Python Version Testing**: Tests against Python 3.8, 3.9, 3.10, and 3.11
 - **Dependency Caching**: Caches pip dependencies for faster builds
 - **Code Quality Checks**:
@@ -130,16 +133,40 @@ This project includes a comprehensive CI/CD pipeline using GitHub Actions that:
 - **Automated Testing**: Runs the complete test suite with pytest
 - **Coverage Reporting**: Generates coverage reports and uploads to Codecov
 
-### Continuous Deployment
-- **Automated Building**: Builds Python packages on successful tests
-- **Artifact Storage**: Stores build artifacts for 30 days
-- **Triggered on**: Push to main/master branches and pull requests
+### Security and Dependency Management (`.github/workflows/security.yml`)
+- **Dependency Vulnerability Scanning**: Weekly security scans with Safety
+- **Code Security Analysis**: Static security analysis with Bandit
+- **Dependency Review**: Automated review of dependency changes in PRs
+- **Security Report Artifacts**: Stores security reports for review
 
-### Pipeline Configuration
-The CI/CD pipeline is defined in `.github/workflows/ci.yml` and includes:
-- Job dependencies to ensure tests pass before building
-- Conditional deployment only on main branch pushes
-- Comprehensive error handling and reporting
+### Release and Deployment (`.github/workflows/release.yml`)
+- **Automated Release Building**: Triggered on git tags and GitHub releases
+- **Package Building**: Creates Python wheel and source distributions
+- **Package Validation**: Validates packages before release
+- **GitHub Releases Integration**: Uploads packages to GitHub releases
+- **Docker Image Creation**: Builds and publishes Docker images to GitHub Container Registry
+- **PyPI Publishing**: Ready-to-use PyPI publication (commented out by default)
+
+### Pre-commit Hooks (`.pre-commit-config.yaml`)
+For developers who want to run quality checks locally:
+
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Set up the git hook scripts
+pre-commit install
+
+# Run hooks on all files
+pre-commit run --all-files
+```
+
+### Pipeline Configuration Features
+- **Job Dependencies**: Ensures tests pass before building/deploying
+- **Conditional Execution**: Different workflows for different events
+- **Comprehensive Error Handling**: Detailed reporting and artifact collection
+- **Security Best Practices**: Uses latest actions and security scanning
+- **Caching Strategy**: Optimized for build speed and resource usage
 
 ## Project Structure
 
