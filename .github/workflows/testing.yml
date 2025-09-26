@@ -8,7 +8,7 @@ run-name: ${{ github.actor }} Building and Testing
 on:
   push:
     tags:
-      - 'a3*'
+      - 'v*'
 # There can be multiple jobs
 jobs:
   # Job name
@@ -49,7 +49,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           # Your image name
-          images: mastersubhajit/cppm
+          images: mastersubhajit/cppm-app
           tags: ${{ github.ref_name }}
       - name: Build and push
         uses: docker/build-push-action@v5
