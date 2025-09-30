@@ -1,6 +1,6 @@
 services:
   web:
-    image: mastersubhajit/cppm-app:latest
+    image: mastersubhajit/cppm-app:${TAG:-latest}
     container_name: web-125998
     platform: linux/amd64      
     command: python3 app.py

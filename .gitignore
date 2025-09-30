@@ -83,3 +83,6 @@ __pycache__
 !.keeps
 /.env
 /models
+
+# Ignore notebooks
+assets/*.ipynb
