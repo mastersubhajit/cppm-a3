@@ -3,8 +3,11 @@ FROM python:3.12-slim
 # Set working directory
 WORKDIR /app
 
+# Environment settings
 ENV UV_LINK_MODE=copy
 ENV MLFLOW_TRACKING_INSECURE_TLS=true
+ENV PATH="/app/.venv/bin:$PATH"
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
@@ -17,21 +20,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set Matplotlib backend to Agg (headless mode)
-RUN pip install --upgrade requests urllib3
-
 # Install uv (fast Python package manager)
-RUN pip install uv
+RUN pip install --upgrade pip && pip install uv
 
 # Copy project files
 COPY . /app
 
 # Create virtual environment and install dependencies
-RUN uv venv .venv && \
-    uv pip install --upgrade pip && \
+RUN uv venv .venv --clear && \
     uv pip install -r requirements.txt
 
-# Expose the port the app runs on
+# Expose ports
 EXPOSE 8080 80
-# Default command: keep container running
-CMD ["sleep", "infinity", "gunicorn", "--bind", "0.0.0.0:80", "app:server"]
+
+# Run app with Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:server"]
