@@ -3,20 +3,41 @@ name = "cppm"
 version = "0.1.0"
 description = "Car price classification project with logistic regression and MLflow tracking."
 authors = [
-    { name = "Subhajit Ghosh", email = "mastersubhajit.ghosh2021@uem.edu.in" }
+    { name = "Subhajit Ghosh", email = "st125009@ait.asia" }
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+license = { text = "MIT" }
+requires-python = ">=3.10"
 
 dependencies = [
-    "pandas",
-    "numpy",
-    "scikit-learn",
-    "mlflow",
-    "matplotlib",
-    "ipykernel"
+    # Core scientific stack
+    "numpy>=2.0.1",
+    "pandas>=2.2.2",
+    "scipy",                        
+    "matplotlib>=3.9.1.post1",
+    "seaborn>=0.13.2",
+
+    # ML + DL
+    "scikit-learn>=1.5.1",
+    "ppscore>=1.1.0",
+    "mlflow>=1.27.0",
+    "torch>=2.4.0",
+    "torchvision>=0.19.0",
+
+    # Dashboard / serving
+    "dash",
+    "dash-bootstrap-components",
+    "gunicorn",
+
+    # Dev / notebook
+    "ipykernel>=6.29.5",
+    "fastapi>=0.118.0",
 ]
 
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+[tool.pdm]
+distribution = false
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ipykernel>=6.29.5",
+]

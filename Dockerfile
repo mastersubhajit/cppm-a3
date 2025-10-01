@@ -18,7 +18,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Set Matplotlib backend to Agg (headless mode)
-# ENV MPLBACKEND=Agg
 RUN pip install --upgrade requests urllib3
 
 # Install uv (fast Python package manager)
@@ -33,6 +32,6 @@ RUN uv venv .venv && \
     uv pip install -r requirements.txt
 
 # Expose the port the app runs on
-EXPOSE 8050
+EXPOSE 8080 80
 # Default command: keep container running
-CMD ["sleep", "infinity", "gunicorn", "--bind", "0.0.0.0:8050", "app:server"]
+CMD ["sleep", "infinity", "gunicorn", "--bind", "0.0.0.0:80", "app:server"]
