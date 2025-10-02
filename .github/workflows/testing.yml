@@ -13,20 +13,15 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app
-
     steps:
       - uses: actions/checkout@v4
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
-          envkey_MLFLOW_USERNAME: ${{ secrets.MLFLOW_USERNAME }}
-          envkey_MLFLOW_PASSWORD: ${{ secrets.MLFLOW_PASSWORD }}
-          envkey_MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_HOST }}
-          envkey_MODEL_NAME: ${{ secrets.MODEL_NAME }}
+          env: |
+            MLFLOW_TRACKING_URI=${{ secrets.MLFLOW_TRACKING_URI }}
+            APP_MODEL_NAME=${{ secrets.APP_MODEL_NAME }}
           file_name: .env
           fail_on_empty: true
           sort_keys: true
@@ -36,8 +31,10 @@ jobs:
 
       - name: Compose up
         run: docker compose up -d
+      - name: Install pytest in container
+        run: docker compose exec -T dash uv pip install pytest
       - name: Testing
-        run: docker compose exec -T cppm .venv/bin/pytest --ignore=app.py -v
+        run: docker compose exec -T dash .venv/bin/pytest --ignore=app.py -v
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
