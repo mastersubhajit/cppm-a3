@@ -6,7 +6,6 @@ WORKDIR /app
 # Environment settings
 ENV UV_LINK_MODE=copy
 ENV MLFLOW_TRACKING_INSECURE_TLS=true
-ENV PATH="/app/.venv/bin:$PATH"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -28,10 +27,11 @@ COPY . /app
 
 # Create virtual environment and install dependencies
 RUN uv venv .venv --clear && \
-    uv pip install -r requirements.txt
+    uv pip install -r requirements.txt && \
+    uv pip install pytest
 
 # Expose ports
 EXPOSE 8080 80
 
-# Run app with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:server"]
+# Default command: keep container running
+CMD ["sleep", "infinity"]
