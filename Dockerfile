@@ -33,4 +33,4 @@ RUN uv venv .venv --clear && \
 EXPOSE 8080 80
 
 # Default command: keep container running
-CMD ["sleep", "infinity"]
+CMD ["python", "sleep", "infinity", "app.py"]
