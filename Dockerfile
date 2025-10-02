@@ -21,14 +21,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install uv (fast Python package manager)
 RUN pip install --upgrade pip && pip install uv
-
+RUN pip install --no-cache-dir pytest
 # Copy project files
 COPY . /app
 
 # Create virtual environment and install dependencies
 RUN uv venv .venv --clear && \
-    uv pip install -r requirements.txt && \
-    uv pip install pytest
+    uv pip install -r requirements.txt
 
 # Expose ports
 EXPOSE 8080 80
