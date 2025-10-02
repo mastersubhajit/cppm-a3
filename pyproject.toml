@@ -13,25 +13,23 @@ dependencies = [
     # Core scientific stack
     "numpy>=2.0.1",
     "pandas>=2.2.2",
-    "scipy",                        
+    "scipy",
     "matplotlib>=3.9.1.post1",
     "seaborn>=0.13.2",
-
     # ML + DL
     "scikit-learn>=1.5.1",
     "ppscore>=1.1.0",
     "mlflow>=1.27.0",
-    "torch>=2.4.0",
+    "torch==2.8.0",
     "torchvision>=0.19.0",
-
     # Dashboard / serving
     "dash",
     "dash-bootstrap-components",
     "gunicorn",
-
     # Dev / notebook
     "ipykernel>=6.29.5",
     "fastapi>=0.118.0",
+    "pytest>=8.4.2",
 ]
 
 [tool.pdm]
