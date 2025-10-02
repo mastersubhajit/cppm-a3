@@ -22,8 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install uv (fast Python package manager)
 RUN pip install --upgrade pip && pip install uv
 RUN pip install 'dash[testing]' -v
-RUN pip install pytest
-RUN pip install pytest-depends
+RUN pip install pytest pytest-depends
 
 # Copy project files
 COPY . /app
@@ -34,6 +33,5 @@ RUN uv venv .venv --clear && \
 
 # Expose ports
 EXPOSE 8080 80
-ENTRYPOINT ["pytest"]
 # Default command: keep container running
-CMD ["python", "sleep", "infinity", "app.py", "-v"]
+CMD ["python", "sleep", "infinity", "app.py"]
