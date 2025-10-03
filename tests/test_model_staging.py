@@ -78,18 +78,18 @@ def test_a3_model_load(a3_model, a3_scaler):
     assert a3_scaler is not None
 
 def test_a3_model_prediction(a3_model, a3_scaler):
-    # Create test data matching A3 model structure
-    CORE_FEATURES = ['year', 'engine', 'max_power', 'mileage']
+    # Create test data matching A3 model structure - use same order as training
+    NUMERIC_COLS_ORDER = ['year', 'max_power', 'mileage', 'engine']
     BRAND_LIST = ['Maruti', 'Hyundai', 'Honda', 'Toyota', 'BMW', 'Audi']
-    ALL_FEATURES = CORE_FEATURES + [f'brand_{b}' for b in BRAND_LIST]
+    ALL_FEATURES = NUMERIC_COLS_ORDER + [f'brand_{b}' for b in BRAND_LIST]
     
     # Build input
     X_input_dict = {feat: 0 for feat in ALL_FEATURES}
     X_input_dict.update({'year': 2019, 'engine': 1197, 'max_power': 94.5, 'mileage': 14.6, 'brand_Maruti': 1})
     
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
-    # Use DataFrame for scaler to preserve feature names
-    X_df[CORE_FEATURES] = a3_scaler.transform(X_df[CORE_FEATURES])
+    # Use DataFrame for scaler to preserve feature names - use same order as training
+    X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER])
     
     pred = a3_model.predict(X_df)
     assert pred is not None
