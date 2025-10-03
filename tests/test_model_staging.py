@@ -114,10 +114,12 @@ def test_a3_model_prediction(a3_model, a3_scaler):
     })
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
 
-    # Apply scaler ONLY to numeric cols (like inference code)
-    X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER])
+    # --- Scale numeric columns (align names with scaler) ---
+    numeric_df = X_df[NUMERIC_COLS_ORDER].copy()
+    numeric_df.columns = a3_scaler.feature_names_in_  # align with training names
+    X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(numeric_df)
 
-    # Convert to numpy before prediction
+    # --- Convert to numpy before prediction ---
     X_array = X_df.to_numpy().astype(np.float64)
     pred = a3_model.predict(X_array)
 
