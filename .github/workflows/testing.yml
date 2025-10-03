@@ -9,6 +9,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 # There can be multiple jobs
 jobs:
   # Job name
