@@ -78,9 +78,14 @@ def test_a3_model_load(a3_model, a3_scaler):
     assert a3_scaler is not None
 
 def test_a3_model_prediction(a3_model, a3_scaler):
-    # Create test data matching A3 model structure - use same order as training
+    # Use exact same features as training
     NUMERIC_COLS_ORDER = ['year', 'max_power', 'mileage', 'engine']
-    BRAND_LIST = ['Maruti', 'Hyundai', 'Honda', 'Toyota', 'BMW', 'Audi']
+    BRAND_LIST = [
+        'Ambassador', 'Ashok', 'Audi', 'BMW', 'Chevrolet', 'Daewoo', 'Datsun', 'Fiat', 
+        'Force', 'Ford', 'Honda', 'Hyundai', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Land', 
+        'Lexus', 'MG', 'Mahindra', 'Maruti', 'Mercedes-Benz', 'Mitsubishi', 'Nissan', 
+        'Opel', 'Peugeot', 'Renault', 'Skoda', 'Tata', 'Toyota', 'Volkswagen', 'Volvo'
+    ]
     ALL_FEATURES = NUMERIC_COLS_ORDER + [f'brand_{b}' for b in BRAND_LIST]
     
     # Build input
@@ -88,9 +93,8 @@ def test_a3_model_prediction(a3_model, a3_scaler):
     X_input_dict.update({'year': 2019, 'engine': 1197, 'max_power': 94.5, 'mileage': 14.6, 'brand_Maruti': 1})
     
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
-    # Use DataFrame for scaler to preserve feature names - use same order as training
     X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER])
     
-    pred = a3_model.predict(X_df)
+    pred = a3_model.predict(X_df.values)  # Convert to numpy array
     assert pred is not None
     assert len(pred) == 1
