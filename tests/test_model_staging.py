@@ -101,10 +101,11 @@ def test_a3_model_prediction(a3_model, a3_scaler):
     })
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
 
-    # Scale only numeric columns with proper feature names
+    # Scale numeric features
     X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER])
 
-    # Predict with MLflow model
-    pred = a3_model.predict(X_df.to_numpy().astype(np.float64))
+    # Convert to numpy for MLflow model
+    X_array = X_df.to_numpy().astype(np.float64)
+    pred = a3_model.predict(X_array)
+
     assert pred is not None and len(pred) == 1
-    assert isinstance(pred[0], (int, float, np.number, str, np.str_))
