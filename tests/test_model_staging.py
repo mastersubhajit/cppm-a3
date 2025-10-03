@@ -88,9 +88,9 @@ def test_a3_model_prediction(a3_model, a3_scaler):
     X_input_dict.update({'year': 2019, 'engine': 1197, 'max_power': 94.5, 'mileage': 14.6, 'brand_Maruti': 1})
     
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
+    # Use DataFrame for scaler to preserve feature names
     X_df[CORE_FEATURES] = a3_scaler.transform(X_df[CORE_FEATURES])
-    X_array = X_df.to_numpy().astype(np.float64)
     
-    pred = a3_model.predict(X_array)
+    pred = a3_model.predict(X_df)
     assert pred is not None
     assert len(pred) == 1
