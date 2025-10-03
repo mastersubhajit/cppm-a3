@@ -173,6 +173,7 @@ typing-inspection==0.4.1
 tzdata==2025.2
 urllib3==2.5.0
 urllib3-secure-extra==0.1.0
+utils==1.0.2
 uv-test==0.1.0
 uvicorn==0.37.0
 waitress==3.0.2
