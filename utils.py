@@ -30,8 +30,14 @@ def load_mlflow(stage='Staging'):
 
 def register_model_to_production():
     from mlflow.client import MlflowClient
+    import os
+    
+    # Set MLflow authentication
+    os.environ['MLFLOW_TRACKING_USERNAME'] = 'admin'
+    os.environ['MLFLOW_TRACKING_PASSWORD'] = 'password'
+    
     client = MlflowClient()
-    for model in client.get_registered_model("st125998-a3").latest_versions: #type: ignore
+    for model in client.get_registered_model(model_name).latest_versions: #type: ignore
         # find model in Staging
         if(model.current_stage == "Staging"):
             version = model.version
