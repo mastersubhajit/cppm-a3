@@ -93,19 +93,34 @@ def test_a3_model_load(a3_model, a3_scaler):
     assert a3_scaler is not None
 
 def test_a3_model_prediction(a3_model, a3_scaler):
-    # Build input exactly as in a3_model.py
+    # Feature definitions must match training
+    NUMERIC_COLS_ORDER = ['year', 'max_power', 'mileage', 'engine']
+    BRAND_LIST = [
+        'Ambassador', 'Ashok', 'Audi', 'BMW', 'Chevrolet', 'Daewoo', 'Datsun', 'Fiat', 
+        'Force', 'Ford', 'Honda', 'Hyundai', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Land', 
+        'Lexus', 'MG', 'Mahindra', 'Maruti', 'Mercedes-Benz', 'Mitsubishi', 'Nissan', 
+        'Opel', 'Peugeot', 'Renault', 'Skoda', 'Tata', 'Toyota', 'Volkswagen', 'Volvo'
+    ]
+    ALL_FEATURES = NUMERIC_COLS_ORDER + [f'brand_{b}' for b in BRAND_LIST]
+
+    # Build sample input (must include all features)
     X_input_dict = {feat: 0 for feat in ALL_FEATURES}
     X_input_dict.update({
-        'year': 2019, 'engine': 1197.0, 'max_power': 94.5,
-        'mileage': 14.6, 'brand_Maruti': 1
+        'year': 2019,
+        'engine': 1197.0,
+        'max_power': 94.5,
+        'mileage': 14.6,
+        'brand_Maruti': 1
     })
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
 
-    # Scale numeric features
+    # Apply scaler ONLY to numeric cols (like inference code)
     X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER])
 
-    # Convert to numpy for MLflow model
+    # Convert to numpy before prediction
     X_array = X_df.to_numpy().astype(np.float64)
     pred = a3_model.predict(X_array)
 
-    assert pred is not None and len(pred) == 1
+    assert pred is not None
+    assert len(pred) == 1
+    assert isinstance(pred[0], (int, float, np.number, str, np.str_))
