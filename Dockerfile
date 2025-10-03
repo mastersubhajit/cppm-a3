@@ -4,7 +4,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Environment settings
-ENV UV_LINK_MODE=copy
+# ENV UV_LINK_MODE=copy
 ENV MLFLOW_TRACKING_INSECURE_TLS=true
 
 # Install system dependencies
