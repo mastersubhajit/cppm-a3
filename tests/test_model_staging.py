@@ -93,7 +93,8 @@ def test_a3_model_prediction(a3_model, a3_scaler):
     X_input_dict.update({'year': 2019, 'engine': 1197, 'max_power': 94.5, 'mileage': 14.6, 'brand_Maruti': 1})
     
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
-    X_df[NUMERIC_COLS_ORDER] = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER])
+    X_scaled = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER].values)
+    X_df[NUMERIC_COLS_ORDER] = X_scaled
     
     pred = a3_model.predict(X_df.values)  # Convert to numpy array
     assert pred is not None
