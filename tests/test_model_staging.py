@@ -69,8 +69,8 @@ def test_a1_model_load(a1_model, a1_scaler):
     assert a1_scaler is not None
 
 def test_a1_model_prediction(a1_model, a1_scaler):
-    X = np.array([[2019, 94.5, 14.6]])
-    X_scaled = a1_scaler.transform(X)
+    X_df = pd.DataFrame([[2019, 94.5, 14.6]], columns=['year', 'max_power', 'mileage'])
+    X_scaled = a1_scaler.transform(X_df)
     pred = a1_model.predict(X_scaled)
     assert pred is not None and len(pred) == 1
     assert isinstance(pred[0], (int, float, np.number))
@@ -81,8 +81,8 @@ def test_a2_model_load(a2_model, a2_scaler):
     assert a2_scaler is not None
 
 def test_a2_model_prediction(a2_model, a2_scaler):
-    X = np.array([[2019, 94.5, 14.6]])
-    X_scaled = a2_scaler.transform(X)
+    X_df = pd.DataFrame([[2019, 94.5, 14.6]], columns=['year', 'max_power', 'mileage'])
+    X_scaled = a2_scaler.transform(X_df)
     pred = a2_model.predict(X_scaled)
     assert pred is not None and len(pred) == 1
     assert isinstance(pred[0], (int, float, np.number))
