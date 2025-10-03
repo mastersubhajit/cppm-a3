@@ -30,7 +30,7 @@ COPY . /app
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install 'dash[testing]' pytest pytest-depends
-
+RUN pip install scikit-learn==1.7.1
 # Set Python path
 ENV PYTHONPATH=/app
 
