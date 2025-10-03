@@ -3,6 +3,13 @@ Test app callbacks for all model pages to ensure proper functionality.
 """
 import pytest
 import numpy as np
+import dash
+from dash import Dash
+
+# Create a Dash app instance before importing pages
+app = Dash(__name__, use_pages=True)
+
+# Now import the pages
 from pages import old_model, new_model, a3_model
 
 def test_old_model_callback():
