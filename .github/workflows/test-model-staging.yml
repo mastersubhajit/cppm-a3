@@ -15,9 +15,7 @@ jobs:
       # We won't build
       # - name: Build the Docker image
       #   run: docker compose build
-      # Build the Docker image
-      - name: Build the Docker image
-        run: docker compose build
+      # This will only load the latest image
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
@@ -28,8 +26,9 @@ jobs:
           sort_keys: true
       - name: Compose up
         run: docker compose up -d
-      # Run model staging tests
+      # This is new
+      # only run test on test_model_staging.py
       - name: Testing
-        run: docker compose run --rm cppm bash -c "source .venv/bin/activate && pytest tests/test_model_staging.py -v"
+        run: docker compose exec -it dash pytest test_model_staging.py -v
       - name: Transition to production
-        run: docker compose run --rm cppm bash -c "source .venv/bin/activate && python transition.py"
+        run: docker compose exec -it dash python transition.py
