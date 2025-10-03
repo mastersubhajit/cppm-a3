@@ -20,8 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # # Create virtual environment and install dependencies
-# RUN uv venv .venv --clear && \
-#     uv pip install -r requirements.txt
+RUN uv venv .venv --clear && \
+    uv pip install -r requirements.txt
 
 # Copy project files first
 COPY . /app
