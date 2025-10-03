@@ -60,7 +60,7 @@ def predict_price_old(n_clicks, year, max_power, mileage):
     year = int(year)
     max_power = float(max_power)
     mileage = float(mileage)
-    X_input = np.array([[year, max_power, mileage]])
+    X_input = pd.DataFrame([[year, max_power, mileage]], columns=['year', 'max_power', 'mileage'])
     X_scaled = scaler.transform(X_input)
     log_pred = model.predict(X_scaled)[0]
     price = float(np.exp(log_pred))
