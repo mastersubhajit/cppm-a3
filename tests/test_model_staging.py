@@ -79,23 +79,45 @@ def test_a3_model_load(a3_model, a3_scaler):
 
 def test_a3_model_prediction(a3_model, a3_scaler):
     # Use exact same features as training
-    NUMERIC_COLS_ORDER = ['year', 'max_power', 'mileage', 'engine']
+    # IMPORTANT: NUMERIC_COLS_ORDER must match the order the scaler was trained on
+    NUMERIC_COLS_ORDER = ['year', 'max_power', 'mileage', 'engine'] # Match a3_model.py
     BRAND_LIST = [
         'Ambassador', 'Ashok', 'Audi', 'BMW', 'Chevrolet', 'Daewoo', 'Datsun', 'Fiat', 
         'Force', 'Ford', 'Honda', 'Hyundai', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Land', 
         'Lexus', 'MG', 'Mahindra', 'Maruti', 'Mercedes-Benz', 'Mitsubishi', 'Nissan', 
         'Opel', 'Peugeot', 'Renault', 'Skoda', 'Tata', 'Toyota', 'Volkswagen', 'Volvo'
     ]
+    
+    # ALL_FEATURES must match the columns expected by the final MLflow model
     ALL_FEATURES = NUMERIC_COLS_ORDER + [f'brand_{b}' for b in BRAND_LIST]
     
     # Build input
     X_input_dict = {feat: 0 for feat in ALL_FEATURES}
-    X_input_dict.update({'year': 2019, 'engine': 1197, 'max_power': 94.5, 'mileage': 14.6, 'brand_Maruti': 1})
+    # Note the engine value has been added here to be consistent with a3_model.py
+    X_input_dict.update({'year': 2019, 'engine': 1197.0, 'max_power': 94.5, 'mileage': 14.6, 'brand_Maruti': 1})
     
     X_df = pd.DataFrame([X_input_dict], columns=ALL_FEATURES)
-    X_scaled = a3_scaler.transform(X_df[NUMERIC_COLS_ORDER].values)
+    
+    # --- CRITICAL CHANGE: Scale using DataFrame columns ---
+    # The scaler expects a DataFrame/columns if it was fitted that way.
+    # a3_scaler is loading a cloudpickle object, which might be a custom scaler 
+    # or a pipeline that handles feature names. The safest way is to mirror 
+    # the correct implementation from a3_model.py, which scales only the numeric columns 
+    # and then updates the DataFrame.
+    
+    # Extract only the columns the scaler expects (NUMERIC_COLS_ORDER)
+    numeric_data_to_scale = X_df[NUMERIC_COLS_ORDER] 
+    
+    # Transform the numeric data
+    X_scaled = a3_scaler.transform(numeric_data_to_scale)
+    
+    # Update the numeric columns in the full DataFrame with the scaled values
     X_df[NUMERIC_COLS_ORDER] = X_scaled
     
-    pred = a3_model.predict(X_df.values)  # Convert to numpy array
+    # The MLflow model expects a NumPy array of all features (scaled numerics + OHE brands)
+    pred = a3_model.predict(X_df.values) 
+    
     assert pred is not None
     assert len(pred) == 1
+    # Add an assertion to check the type of the classification prediction
+    assert isinstance(pred[0], (int, float, np.number, str, np.str_))
