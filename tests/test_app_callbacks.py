@@ -7,7 +7,7 @@ import dash
 from dash import Dash
 
 # Create a Dash app instance before importing pages
-app = Dash(__name__, use_pages=True)
+app = Dash(__name__, use_pages=True, pages_folder="")
 
 # Now import the pages
 from pages import old_model, new_model, a3_model
