@@ -30,5 +30,5 @@ jobs:
       # only run test on test_model_staging.py
       - name: Testing
         run: docker compose exec -it cppm pytest test_model_staging.py -v
-      - name: Transition to production
-        run: docker compose exec -it cppm python transition.py
+      # - name: Transition to production
+      #   run: docker compose exec -it cppm python transition.py

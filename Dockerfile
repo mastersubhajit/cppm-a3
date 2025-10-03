@@ -19,18 +19,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv (fast Python package manager)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --upgrade pip && pip install uv
-RUN pip install 'dash[testing]' -v
+# # Create virtual environment and install dependencies
+# RUN uv venv .venv --clear && \
+#     uv pip install -r requirements.txt
 
-# Copy project files
+# Copy project files first
 COPY . /app
 
-# Create virtual environment and install dependencies
-RUN uv venv .venv --clear && \
-    uv pip install -r requirements.txt
+# Install dependencies directly
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install 'dash[testing]' pytest pytest-depends
+
+# Set Python path
+ENV PYTHONPATH=/app
 
 # Expose ports
 EXPOSE 8080 80
