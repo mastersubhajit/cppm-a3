@@ -7,6 +7,9 @@ services:
       - "8080:8080"
     volumes:
       - .:/app
+    environment:
+      - APP_MODEL_NAME=${APP_MODEL_NAME}
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI}
     command: sleep infinity
   mlflow:
     build: 
