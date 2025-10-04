@@ -30,6 +30,7 @@ def load_mlflow(stage='Staging'):
 
 def register_model_to_production():
     from mlflow.client import MlflowClient
+    from mlflow.exceptions import RestException
     import os
     
     # Set MLflow authentication
@@ -39,12 +40,25 @@ def register_model_to_production():
     model_name = os.environ['APP_MODEL_NAME']
     client = MlflowClient()
     
-    print(f"Looking for model: {model_name}")
-    for model in client.get_registered_model(model_name).latest_versions: #type: ignore
-        # find model in Staging
-        if(model.current_stage == "Staging"):
-            version = model.version
-            client.transition_model_version_stage(
-                name=model_name, version=version, stage="Production", archive_existing_versions=True
-            )
-            print(f"Model version {version} is promoted to Production")
+    try:
+        registered_model = client.get_registered_model(model_name)
+        staging_found = False
+        
+        for model in registered_model.latest_versions:
+            if model.current_stage == "Staging":
+                staging_found = True
+                version = model.version
+                client.transition_model_version_stage(
+                    name=model_name, version=version, stage="Production", archive_existing_versions=True
+                )
+                print(f"Model version {version} is promoted to Production")
+                break
+        
+        if not staging_found:
+            print("No model found in Staging stage")
+            
+    except RestException as e:
+        if "RESOURCE_DOES_NOT_EXIST" in str(e):
+            print(f"Model not found in registry")
+        else:
+            raise e
