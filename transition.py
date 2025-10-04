@@ -34,3 +34,6 @@ def register_model_to_production():
             break
     else:
         print("No model found in Staging stage to promote.")
+
+if __name__ == "__main__":
+    register_model_to_production()
