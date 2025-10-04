@@ -12,8 +12,8 @@ def load(filename:str) -> object:
 import mlflow
 import os
 
-model_name = os.environ['APP_MODEL_NAME']
 def load_mlflow(stage='Staging'):
+    model_name = os.environ['APP_MODEL_NAME']
     cache_path = os.path.join("models",stage)
     if(os.path.exists(cache_path) == False):
         os.makedirs(cache_path)
@@ -36,7 +36,10 @@ def register_model_to_production():
     os.environ['MLFLOW_TRACKING_USERNAME'] = 'admin'
     os.environ['MLFLOW_TRACKING_PASSWORD'] = 'password'
     
+    model_name = os.environ['APP_MODEL_NAME']
     client = MlflowClient()
+    
+    print(f"Looking for model: {model_name}")
     for model in client.get_registered_model(model_name).latest_versions: #type: ignore
         # find model in Staging
         if(model.current_stage == "Staging"):
