@@ -84,7 +84,7 @@ Run tests locally with Docker:
 ```bash
 docker compose build
 docker compose up -d
-docker compose exec -T cppm pytest -v
+docker compose exec cppm pytest -v
 ```
 ## Structure
 ```
